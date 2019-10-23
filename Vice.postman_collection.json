@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "760c0e8d-3a18-4250-8c13-3f8b7bf69702",
+		"name": "Vice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "10 recent videos",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "10252260-b451-4070-8401-522091b0366f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9da995f8-9f81-4f1a-8edd-e4d5df91a69d",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Check video titles\", function () {",
+							"    for(i=0; i<jsonData.length; i++){",
+							"        console.log(jsonData[i].title)",
+							"        pm.expect(jsonData[i].title).to.not.eql(\"\");",
+							"    }",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.vice.com/api/v1/videos?locale=en_us",
+					"protocol": "https",
+					"host": [
+						"www",
+						"vice",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"videos"
+					],
+					"query": [
+						{
+							"key": "locale",
+							"value": "en_us"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 recent articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.vice.com/api/v1/articles?locale=en_us",
+					"protocol": "https",
+					"host": [
+						"www",
+						"vice",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "locale",
+							"value": "en_us"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
